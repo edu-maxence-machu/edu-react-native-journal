@@ -1,12 +1,12 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native'
+import { StatusBar } from 'expo-status-bar';
 
 export default function Header(props){
 
-    console.log(props)
-
     return (
         <View style={styles.header}>
+            <StatusBar style="auto" />
             <Text style={styles.headerText}>{props.title}</Text>
         </View>
     )

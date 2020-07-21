@@ -1,138 +1,43 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, Image, Button, SafeAreaView, ScrollView } from 'react-native';
 import Header from './components/Header'
+import Journal from './pages/Journal'
 
 export default function App() {
 
+  const dataJournal = [
+    {
+      title: 'Faire les courses',
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      done: true
+    },
+    {
+      title: 'Sortir les poubelles',
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
+      done: false
+    },
+    {
+      title: 'Donner à manger au chien',
+      description: "Consectetur adipiscing elit",
+      done: true
+    }
+  ]
+
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar style="auto" />
 
       <Header title="Journal"/>
 
-      <ScrollView horizontal={true} style={styles.scrollHorizontal}>
-          <Text style={styles.scrollText}>Maison</Text>
-          <Text style={styles.scrollText}>Travail</Text>
-          <Text style={styles.scrollText}>Amis</Text>
-          <Text style={styles.scrollText}>Famille</Text>
-      </ScrollView>
-
-      <ScrollView style={styles.noteContainer}>
-        <View style={styles.note}>
-              <View style={styles.dragDrop}>
-
-              </View>
-
-              <View style={styles.noteTextContainer}>
-                <Text style={styles.noteTitle}>Ma note</Text>
-                <Text style={styles.noteDesc}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </Text>
-              </View>
-          </View>
-        <View style={styles.note}>
-              <View style={styles.dragDrop}>
-
-              </View>
-
-              <View style={styles.noteTextContainer}>
-                <Text style={styles.noteTitle}>Ma note</Text>
-                <Text style={styles.noteDesc}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </Text>
-              </View>
-          </View>
-        <View style={styles.note}>
-              <View style={styles.dragDrop}>
-
-              </View>
-
-              <View style={styles.noteTextContainer}>
-                <Text style={styles.noteTitle}>Ma note</Text>
-                <Text style={styles.noteDesc}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </Text>
-              </View>
-          </View>
-        <View style={styles.note}>
-              <View style={styles.dragDrop}>
-
-              </View>
-
-              <View style={styles.noteTextContainer}>
-                <Text style={styles.noteTitle}>Ma note</Text>
-                <Text style={styles.noteDesc}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </Text>
-              </View>
-          </View>
-        <View style={styles.note}>
-              <View style={styles.dragDrop}>
-
-              </View>
-
-              <View style={styles.noteTextContainer}>
-                <Text style={styles.noteTitle}>Ma note</Text>
-                <Text style={styles.noteDesc}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </Text>
-              </View>
-          </View>
-        <View style={styles.note}>
-              <View style={styles.dragDrop}>
-
-              </View>
-
-              <View style={styles.noteTextContainer}>
-                <Text style={styles.noteTitle}>Ma note</Text>
-                <Text style={styles.noteDesc}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </Text>
-              </View>
-          </View>
-          
-          
-      </ScrollView>
+      <Journal data={dataJournal}/>
 
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  noteTextContainer : {
-    paddingHorizontal: 10
-  },
-  noteTitle : {
-    fontSize: 18,
-    fontWeight: 'bold'
-  },
-  noteDesc: {
-      fontWeight: '200',
-      marginTop: 5,
-      },
-  note : {
-    flexDirection: 'row',
-    marginTop: 20
-  },
-  dragDrop: {
-      width: 40,
-      height: '100%',
-  },
-  noteContainer: {
-    paddingHorizontal: 20,
-    paddingTop: 10,
-    //flex: 1,
-    width: '100%'
-  },
-  scrollHorizontal: {
-    backgroundColor: 'white',
-    //height: 50,
-    width: "100%",
-    paddingVertical: 5,
-    //flexDirection: 'row',
-    //alignItems: 'center'
-  },
-  scrollText : {
-      fontWeight: 'bold',
-      fontSize: 24,
-      marginHorizontal: 20,
-  },
   container: {
     flex: 1,
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-  },
-  tinyLogo: {
-    width: 300,
-    height: 70,
   },
 });
