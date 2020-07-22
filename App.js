@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, Button, SafeAreaView, ScrollView } from 'react-native';
 import Header from './components/Header'
 import Journal from './pages/Journal'
+import BankAccount from './pages/BankAccount'
 
 export default function App() {
 
@@ -23,18 +24,46 @@ export default function App() {
     }
   ]
 
+  const [page, setPage] = useState('BankAccount');
+  
+  function navigate(page){
+    setPage(page)
+  }
+
   return (
     <SafeAreaView style={styles.container}>
 
-      <Header title="Journal"/>
+      <Header title={page}/>
 
-      <Journal data={dataJournal}/>
+      { page === 'Journal' && <Journal data={dataJournal}/> }
+
+      { page === 'BankAccount' && <BankAccount />}
+      
+      <View style={styles.topMenu}>
+        <Button 
+          title="Bank" 
+          color={page === "BankAccount" ? "green" : 'grey'}
+          onPress={() => navigate('BankAccount')}
+          />
+        <Button 
+          title="Journal" 
+          color={page === "Journal" ? 'green' : 'grey'}
+          onPress={() => navigate('Journal')}
+
+          />
+      </View>
 
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  topMenu: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
   container: {
     flex: 1,
     alignItems: 'flex-start',
