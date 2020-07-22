@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, Button, SafeAreaView, ScrollView } from 
 import Header from './components/Header'
 import Journal from './pages/Journal'
 import BankAccount from './pages/BankAccount'
+import Login from './pages/Login'
 
 export default function App() {
 
@@ -25,9 +26,23 @@ export default function App() {
   ]
 
   const [page, setPage] = useState('BankAccount');
+  const [loggedIn, setLoggedIn] = useState(true);
   
   function navigate(page){
     setPage(page)
+  }
+
+  function login(){
+    setLoggedIn(true);
+  }
+  function logout(){
+    setLoggedIn(false);
+  }
+
+  if(!loggedIn){
+    return (
+      <Login login={login}/>
+    )
   }
 
   return (
