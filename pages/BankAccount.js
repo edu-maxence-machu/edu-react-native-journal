@@ -1,9 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {View, Text, StyleSheet, ScrollView, TouchableOpacity} from 'react-native'
 
 export default function BankAccount(){
 
     const [bank, setBank] = useState(0);
+    const [history,setHistory] = useState([]);
+
+    /*
+        mount et update
+    */
+    useEffect(() => {
+        console.log('Je suis mis à jour');
+    })
+
+    /* Mount */
+    useEffect(() => {
+        console.log('Je suis crée');
+    }, [])
+
+    useEffect(() => {
+
+        function updateHistory(){
+            setHistory([
+                ...history, `Je suis à ${bank} €`
+            ])
+        }
+
+        updateHistory();
+    }, [bank])
+
 
     function salaire(){
         let _new = bank;
@@ -35,6 +60,15 @@ export default function BankAccount(){
                 style={styles.button}>
                     <Text>Payer loyer</Text>
                 </TouchableOpacity>
+            </View>
+
+            <View>
+                {
+                    history.map((el) => {
+                        return <Text>{el}</Text>
+                    })
+                }
+                
             </View>
         </View>
     )
