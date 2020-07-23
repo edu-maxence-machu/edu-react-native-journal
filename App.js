@@ -5,6 +5,7 @@ import Journal from './pages/Journal'
 import BankAccount from './pages/BankAccount'
 import AddForm from './pages/AddForm'
 import Login from './pages/Login'
+import ListeCourses from './pages/ListeCourses'
 import TutorialImage from './pages/TutorialImage';
 
 export default function App() {
@@ -60,12 +61,19 @@ export default function App() {
       { page === 'AddForm' && <AddForm handleAdd={addToJournal}/>}
 
       { page === 'Tutorial' && <TutorialImage/>}
+
+      { page === 'Courses' && <ListeCourses/>}
       
       <View style={styles.topMenu}>
         <Button 
           title="Bank" 
           color={page === "BankAccount" ? "green" : 'grey'}
           onPress={() => navigate('BankAccount')}
+          />
+        <Button 
+          title="Bank" 
+          color={page === "Courses" ? "green" : 'grey'}
+          onPress={() => navigate('Courses')}
           />
 
         <Button 
