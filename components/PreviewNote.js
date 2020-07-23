@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native'
-
+import {Card} from 'react-native-elements'
 function Title({children, done}){
     return (
         <Text style={styles.noteTitle}>{done && '✅'} {children}</Text>
@@ -58,10 +58,10 @@ export default function PreviewNote({dataNote}){
     */
 }
 
-            <View style={styles.noteTextContainer}>
+            <Card style={styles.noteTextContainer}>
                 <Title done={dataNote.done}>{dataNote.title}</Title>
                 <Description>{dataNote.description}</Description>
-            </View>
+            </Card>
         </View>
     )
 }
@@ -81,7 +81,9 @@ const styles = StyleSheet.create({
         },
     note : {
       flexDirection: 'row',
-      marginTop: 20
+      marginTop: 20,
+      flex: 1,
+      flexShrink: 1
     },
     dragDrop: {
         width: 40,
@@ -90,8 +92,6 @@ const styles = StyleSheet.create({
     noteContainer: {
       paddingHorizontal: 20,
       paddingTop: 10,
-      //flex: 1,
-      width: '100%'
     },
   });
   

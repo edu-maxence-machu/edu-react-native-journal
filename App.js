@@ -1,31 +1,17 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, Button, SafeAreaView, ScrollView } from 'react-native';
-import Header from './components/Header'
+import MyHeader from './components/Header'
 import Journal from './pages/Journal'
 import BankAccount from './pages/BankAccount'
+import AddForm from './pages/AddForm'
 import Login from './pages/Login'
+import TutorialImage from './pages/TutorialImage';
 
 export default function App() {
 
-  const dataJournal = [
-    {
-      title: 'Faire les courses',
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      done: true
-    },
-    {
-      title: 'Sortir les poubelles',
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
-      done: false
-    },
-    {
-      title: 'Donner à manger au chien',
-      description: "Consectetur adipiscing elit",
-      done: true
-    }
-  ]
+  const [dataJournal, setDataJournal] = useState([])
 
-  const [page, setPage] = useState('BankAccount');
+  const [page, setPage] = useState('Journal');
   const [loggedIn, setLoggedIn] = useState(true);
   
   function navigate(page){
@@ -39,6 +25,22 @@ export default function App() {
     setLoggedIn(false);
   }
 
+  /*
+  Add to state ([dataJournal])
+  */
+  function addToJournal(title, desc){
+    
+    setDataJournal([
+      ...dataJournal, {
+        title: title,
+        description: desc,
+        done: false
+      }
+    ])
+
+    navigate('Journal');
+  }
+
   if(!loggedIn){
     return (
       <Login login={login}/>
@@ -48,11 +50,16 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
 
-      <Header title={page}/>
+      <MyHeader title={page}/>
 
-      { page === 'Journal' && <Journal data={dataJournal}/> }
+      { page === 'Journal' && 
+      <Journal data={dataJournal} navigate={navigate}/> }
 
       { page === 'BankAccount' && <BankAccount />}
+
+      { page === 'AddForm' && <AddForm handleAdd={addToJournal}/>}
+
+      { page === 'Tutorial' && <TutorialImage/>}
       
       <View style={styles.topMenu}>
         <Button 
@@ -60,11 +67,17 @@ export default function App() {
           color={page === "BankAccount" ? "green" : 'grey'}
           onPress={() => navigate('BankAccount')}
           />
+
         <Button 
           title="Journal" 
           color={page === "Journal" ? 'green' : 'grey'}
           onPress={() => navigate('Journal')}
+          />
 
+        <Button 
+          title="Image" 
+          color={page === "Tutorial" ? 'green' : 'grey'}
+          onPress={() => navigate('Tutorial')}
           />
       </View>
 
@@ -80,6 +93,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around'
   },
   container: {
+    width: '100%',
     flex: 1,
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
