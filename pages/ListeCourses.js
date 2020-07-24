@@ -14,20 +14,25 @@ export default function ListeCourses(){
 
     const [liste, setListe] = useState([]);
 
-    /*  [3] : Récupérer la liste de courses depuis Firebase*/
-    db.collection("courses").onSnapshot(function(querySnapshot) {
-        // Crée une variable temporaire
-        let _tmpList = [];
-        
-        querySnapshot.forEach(function(doc) {
-            // On ajoute chaque élément à la list
-            _tmpList.push(doc.data());
-        });
+    /*  [3] : Récupérer la liste de courses depuis Firebase */
+    useEffect(() => { 
+        const unsubscribe = db.collection("courses").onSnapshot(function(querySnapshot) {
+            // Crée une variable temporaire
+            let _tmpList = [];
+            
+            querySnapshot.forEach(function(doc) {
+                // On ajoute chaque élément à la list
+                _tmpList.push(doc.data());
+            });
+    
+            //On met à jour la liste
+            setListe(_tmpList);
+        });    
+ 
+        return () => unsubscribe()
+ }, []);
 
-        //On met à jour la liste
-        setListe(_tmpList);
-    })
-
+    
     function send(){
         // [2] : envoyer les données sur Firebase
         db.collection("courses").doc().set({
